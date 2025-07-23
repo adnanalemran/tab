@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="msapplication-navbutton-color" content="#8b5cf6">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Dev by Adnan</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <style>
+        .manrope {
+            font-family: "Manrope", sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            max-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            color: #374151;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 0.75rem 1.5rem;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .flex-row {
+            flex-direction: row;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .items-start {
+            align-items: flex-start;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .gap-1 {
+            gap: 0.25rem;
+        }
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .mb-1 {
+            margin-bottom: 0.125rem;
+        }
+        .mb-2 {
+            margin-bottom: 0.25rem;
+        }
+        .mb-3 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-4 {
+            margin-bottom: 0.75rem;
+        }
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .text-xs {
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+        .text-base {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+        .font-medium {
+            font-weight: 500;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .text-gray-500 {
+            color: #6b7280;
+        }
+        .text-gray-600 {
+            color: #4b5563;
+        }
+        .text-gray-700 {
+            color: #374151;
+        }
+        .text-gray-800 {
+            color: #1f2937;
+        }
+        .text-white {
+            color: #ffffff;
+        }
+        .text-red-400 {
+            color: #fc8181;
+        }
+        .text-red-500 {
+            color: #f56565;
+        }
+        .text-blue-400 {
+            color: #63b3ed;
+        }
+        .text-blue-500 {
+            color: #4299e1;
+        }
+        .text-blue-600 {
+            color: #3182ce;
+        }
+        .text-green-500 {
+            color: #48bb78;
+        }
+        .bg-white {
+            background-color: #ffffff;
+        }
+        .bg-gray-600 {
+            background-color: #4b5563;
+        }
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        .hidden {
+            display: none;
+        }
+        .sm-inline {
+            display: none;
+        }
+        
+        @media (min-width: 640px) {
+            .sm-inline {
+                display: inline;
+            }
+            .search-input-container {
+                flex-direction: row;
+            }
+            .footer-card .flex {
+                flex-direction: row;
+            }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .tool-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            transform-origin: center;
+        }
+        .tool-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .tool-btn:hover::before {
+            left: 100%;
+        }
+        .tool-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.35);
+        }
+        .tool-btn:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+        .search-container {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        .search-input {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1), inset 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #374151;
+            backdrop-filter: blur(10px);
+        }
+        .search-input:focus {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), 0 8px 25px rgba(139, 92, 246, 0.2);
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+        }
+        .search-input::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
+        }
+        .search-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+            font-weight: 600;
+        }
+        .search-btn:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+        }
+        .search-btn:active {
+            transform: translateY(0);
+        }
+        .header-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        .time-display {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .time-display:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        .tools-section {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            height: 1px;
+            margin: 0.5rem 0;
+            border-radius: 1px;
+        }
+        .footer-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-slide-up {
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.98);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Enhanced text styles */
+        .text-white {
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .text-gray-800 {
+            color: #1a202c;
+            font-weight: 600;
+        }
+        .text-gray-600 {
+            color: #4a5568;
+        }
+        .text-gray-700 {
+            color: #2d3748;
+        }
+        
+        /* Improved tools grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* SVG icon styles */
+        svg {
+            flex-shrink: 0;
+        }
+        .tool-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .search-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .footer-card svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-card svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* New Time Layout */
+        .time-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        
+        .date-section {
+            flex: 1;
+        }
+        
+        .day-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 0.25rem 0;
+            line-height: 1.1;
+        }
+        
+        .date-subtitle {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .times-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: right;
+        }
+        
+        .time-row {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .time-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .time-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-left: 0;
+        }
+        
+        /* Bookmarks Section */
+        .bookmarks-section {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        
+        .bookmarks-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            min-height: 35px;
+        }
+        
+        .bookmark-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.2) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.7rem;
+            transition: all 0.25s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            min-width: 100px;
+            max-width: 140px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .bookmark-item.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg) scale(1.02);
+            z-index: 1000;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bookmark-item.drag-over {
+            border-color: rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(255, 255, 255, 0.3) 100%);
+            transform: scale(1.05);
+        }
+        
+        .bookmark-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.4s;
+        }
+        
+        .bookmark-item:hover::before {
+            left: 100%;
+        }
+        
+        .bookmark-item:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.3) 100%);
+            color: #1f2937;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .bookmark-item:active {
+            transform: translateY(-1px) scale(1.005);
+        }
+        
+        .bookmark-icon {
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        
+        .bookmark-item:hover .bookmark-icon {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        }
+        
+        .bookmark-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        
+        .bookmark-delete {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-radius: 50%;
+            border: 1px solid white;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 4px rgba(239, 68, 68, 0.3);
+            transition: all 0.25s ease;
+            z-index: 10;
+        }
+        
+        .bookmark-delete:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: scale(1.05);
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+        }
+        
+        .bookmark-item:hover .bookmark-delete {
+            display: flex;
+        }
+        
+        .bookmark-controls {
+            text-align: center;
+        }
+        
+        .add-bookmark-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.2) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.7rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-bookmark-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.4s;
+        }
+        
+        .add-bookmark-btn:hover::before {
+            left: 100%;
+        }
+        
+        .add-bookmark-btn:hover {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 100%);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #1f2937;
+        }
+        
+        .add-bookmark-btn svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.25s ease;
+        }
+        
+        .add-bookmark-btn:hover svg {
+            transform: rotate(45deg);
+        }
+        
+        /* Modal Styles */
+        .bookmark-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bookmark-modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #374151;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15), 0 4px 12px rgba(139, 92, 246, 0.2);
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+        }
+        
+        .form-group input::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+        
+        .cancel-btn, .save-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cancel-btn {
+            background: rgba(107, 114, 128, 0.2);
+            color: #374151;
+        }
+        
+        .cancel-btn:hover {
+            background: rgba(107, 114, 128, 0.3);
+        }
+        
+        .save-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+        
+        .save-btn:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
+
+        @media (max-width: 768px) {
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            .header-card {
+                padding: 0.75rem;
+            }
+            .header-card .flex {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+            .tools-section {
+                padding: 0.75rem;
+            }
+            .search-container {
+                padding: 0.75rem;
+            }
+            .search-input-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .search-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.5rem 0.75rem;
+            }
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .tool-btn {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+            .time-display {
+                padding: 0.5rem;
+            }
+            .time-zones-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .time-zones-container .time-display {
+                min-width: auto;
+                max-width: none;
+            }
+            
+            /* New responsive design */
+            .time-layout {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .day-title {
+                font-size: 1.75rem;
+            }
+            .date-subtitle {
+                font-size: 0.875rem;
+            }
+            .times-section {
+                text-align: center;
+            }
+            .time-row {
+                display: block;
+                margin-bottom: 0.25rem;
+            }
+            .time-label {
+                font-size: 0.8rem;
+            }
+            .time-value {
+                font-size: 0.9rem;
+            }
+            
+            /* Bookmarks responsive */
+            .bookmarks-section {
+                padding: 0.5rem;
+            }
+            .bookmarks-container {
+                gap: 0.3rem;
+                min-height: 30px;
+            }
+            .bookmark-item {
+                min-width: 85px;
+                max-width: 110px;
+                padding: 0.3rem 0.4rem;
+                font-size: 0.6rem;
+                gap: 0.3rem;
+            }
+            .bookmark-icon {
+                width: 16px;
+                height: 16px;
+                font-size: 0.7rem;
+                border-radius: 3px;
+            }
+            .bookmark-delete {
+                width: 12px;
+                height: 12px;
+                top: -4px;
+                right: -4px;
+                font-size: 8px;
+            }
+            .add-bookmark-btn {
+                padding: 0.3rem 0.4rem;
+                font-size: 0.6rem;
+                gap: 0.3rem;
+            }
+            .modal-content {
+                padding: 1rem;
+                margin: 0.75rem;
+            }
+            .text-lg { font-size: 1rem; }
+            .text-xl { font-size: 1.125rem; }
+            .text-2xl { font-size: 1.25rem; }
+            .text-3xl { font-size: 1.5rem; }
+            .text-4xl { font-size: 1.75rem; }
+            .mb-3 { margin-bottom: 0.5rem; }
+            .mb-4 { margin-bottom: 0.75rem; }
+            .px-4 { padding-left: 0.75rem; padding-right: 0.75rem; }
+            .py-3 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 0.375rem;
+            }
+            .header-card h1 {
+                font-size: 1.75rem;
+            }
+            .time-display {
+                padding: 0.25rem;
+            }
+            .tool-btn {
+                padding: 0.375rem 0.5rem;
+                font-size: 0.625rem;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .container {
+                padding: 0.5rem;
+            }
+            .header-card, .tools-section, .search-container, .footer-card {
+                margin-bottom: 0.5rem;
+            }
+            .header-card h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.25rem;
+            }
+            .time-display {
+                padding: 0.25rem;
+                margin-bottom: 0.125rem;
+            }
+            .tool-btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.625rem;
+            }
+            .search-input {
+                padding: 0.5rem;
+            }
+            .search-btn {
+                padding: 0.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .tools-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .text-lg { font-size: 1.125rem; }
+            .text-xl { font-size: 1.25rem; }
+            .text-2xl { font-size: 1.5rem; }
+            .text-3xl { font-size: 1.875rem; }
+            .text-4xl { font-size: 2.25rem; }
+            .mb-3 { margin-bottom: 0.75rem; }
+            .mb-4 { margin-bottom: 1rem; }
+            .px-4 { padding-left: 1rem; padding-right: 1rem; }
+            .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+            .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .container {
+                padding: 1rem 1rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .text-lg { font-size: 1.125rem; }
+            .text-xl { font-size: 1.25rem; }
+            .text-2xl { font-size: 1.5rem; }
+            .text-3xl { font-size: 1.875rem; }
+            .text-4xl { font-size: 2.25rem; }
+            .mb-3 { margin-bottom: 0.75rem; }
+            .mb-4 { margin-bottom: 1rem; }
+            .px-4 { padding-left: 1rem; padding-right: 1rem; }
+            .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+            .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .header-card .flex {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 0;
+            }
+            .header-card .text-center:first-child {
+                text-align: left;
+            }
+            .header-card .text-center:last-child {
+                text-align: right;
+            }
+            .header-card h1 {
+                font-size: 2.25rem;
+                line-height: 2.5rem;
+            }
+            .header-card p {
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+            }
+            .time-display .text-lg {
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+            .tools-section h3 {
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+            .search-container h2 {
+                font-size: 1.5rem;
+                line-height: 2rem;
+            }
+            .search-input {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+            .search-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+            .tool-btn {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+            .footer-card {
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="manrope">
+    <div class="container animate-fade-in">
+        <!-- Header with Date and Time -->
+        <div class="header-card mb-3 animate-slide-up">
+            <div class="time-layout">
+                <!-- Left side: Day and Date -->
+                <div class="date-section">
+                    <h1 class="day-title" id="currentDay">Loading...</h1>
+                    <p class="date-subtitle" id="currentDate">Loading...</p>
+                </div>
+                
+                <!-- Right side: Time Zones -->
+                <div class="times-section">
+                    <div class="time-row">
+                        <span class="time-label">Australia Time: <span class="time-value" id="australiaTime">Loading...</span></span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">Bangladesh Time: <span class="time-value" id="bangladeshTime">Loading...</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Section -->
+        <div class="tools-section mb-3 animate-slide-up">
+            <!-- Daily Tools -->
+            <div class="mb-3">
+                <div class="text-center mb-2">
+                    <h3 class="text-lg font-bold text-gray-800 mb-1">Daily Tools</h3>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://youtube.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-red-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">YouTube</span>
+                    </a>
+                    <a href="https://facebook.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-blue-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">Facebook</span>
+                    </a>
+                    <a href="https://gmail.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-red-400 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">Gmail</span>
+                    </a>
+                    <a href="https://outlook.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-blue-400 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7.462 0C5.54 0 4 1.54 4 3.462V20.54C4 22.46 5.54 24 7.462 24h9.076C18.46 24 20 22.46 20 20.538V7.385h-4.615C14.54 7.385 13.846 6.692 13.846 5.846V0H7.462zM0 4.615v14.77C0 20.692.692 21.385 1.54 21.385h1.846V4.615H0zM15.385 0v5.846h4.615L15.385 0z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">Outlook</span>
+                    </a>
+                    <a href="https://linkedin.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-blue-600 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">LinkedIn</span>
+                    </a>
+                    <a href="https://atlassian.net" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-blue-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.53 2c0-.28.22-.5.5-.5s.5.22.5.5l-.02 7.54c0 .28-.22.5-.5.5s-.5-.22-.5-.5L11.53 2zM12.5 14.5c0-.28-.22-.5-.5-.5s-.5.22-.5.5l.02 7.54c0 .28.22.5.5.5s.5-.22.5-.5L12.5 14.5z"/>
+                            <path d="M7.5 6.5c0-.28.22-.5.5-.5s.5.22.5.5v11c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-11zM16.5 6.5c0-.28-.22-.5-.5-.5s-.5.22-.5.5v11c0 .28.22.5.5.5s.5-.22.5-.5v-11z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">Jira</span>
+                    </a>
+                      <a href="https://chat.openai.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
+                        <svg class="text-green-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142-.0852 4.783-2.7582a.7712.7712 0 0 0 .7806 0l5.8428 3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
+                        </svg>
+                        <span class="font-semibold text-sm">ChatGPT</span>
+                    </a>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Bookmarks Section -->
+        <div class="bookmarks-section mb-3 animate-slide-up">
+            <div class="text-center mb-2">
+                <h3 class="text-lg font-bold text-gray-800 mb-1">My Bookmarks</h3>
+                <div class="section-divider"></div>
+            </div>
+            <div class="bookmarks-container" id="bookmarksContainer">
+                <!-- Bookmarks will be loaded here -->
+            </div>
+            <div class="bookmark-controls">
+                <button id="addBookmarkBtn" class="add-bookmark-btn glass-effect px-3 py-2 rounded-lg text-gray-700 font-semibold text-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                    </svg>
+                    Add Bookmark
+                </button>
+            </div>
+        </div>
+
+        <!-- Add Bookmark Modal -->
+        <div class="bookmark-modal" id="bookmarkModal">
+            <div class="modal-content glass-effect">
+                <h3 class="modal-title">Add New Bookmark</h3>
+                <form id="bookmarkForm">
+                    <div class="form-group">
+                        <label for="bookmarkName">Name:</label>
+                        <input type="text" id="bookmarkName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookmarkUrl">URL:</label>
+                        <input type="url" id="bookmarkUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookmarkIcon">Icon (optional):</label>
+                        <input type="text" id="bookmarkIcon" placeholder="e.g., ⭐ or SVG">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="cancelBookmarkBtn" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-container mb-3 animate-slide-up">
+            <div class="text-center mb-2">
+                <h2 class="text-lg font-bold text-gray-800 mb-1">Search</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <form action="https://www.google.com/search" method="get" target="_blank" class="search-input-container flex flex-col gap-3 mb-4">
+                <input 
+                    type="text" 
+                    name="q"
+                    placeholder="What are you looking for today?" 
+                    class="search-input flex-1 px-4 py-3 rounded-lg text-gray-700 font-medium text-base"
+                    autocomplete="off"
+                    required
+                >
+                <button 
+                    type="submit"
+                    class="search-btn px-6 py-3 text-white rounded-lg font-bold text-base flex items-center gap-2 justify-center"
+                >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.384,21.619,16.855,15.09a9.284,9.284,0,1,0-1.768,1.768l6.529,6.529a1.266,1.266,0,0,0,1.768,0A1.251,1.251,0,0,0,23.384,21.619ZM9.625,18.25A8.625,8.625,0,1,1,18.25,9.625,8.635,8.635,0,0,1,9.625,18.25Z"/>
+                    </svg>
+                    <span class="sm-inline">Search</span>
+                </button>
+            </form>
+        </div>
+                
+            </div>
+
+         
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-card text-center animate-slide-up">
+            <div class="flex flex-col items-center gap-2 text-gray-600 text-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="text-gray-500" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span class="font-medium">Develop by Adnan</span>
+                </div>
+                <span class="px-2 py-1 bg-gray-600 text-white text-xs rounded-full font-bold">v2.1</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="clock.js"></script>
+    <script src="bookmarks.js"></script>
+</body>
+</html>

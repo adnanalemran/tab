@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Dev by Adnan",
+  "version": "1.0",
+  "description": "Custom HTML/CSS homepage for Chrome.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "128": "chrome.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
