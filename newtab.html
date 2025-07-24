@@ -17,18 +17,19 @@
             font-family: "Manrope", sans-serif;
         }
         body {
-            background: #4a5568;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             min-height: 100vh;
             max-height: 100vh;
             position: relative;
             overflow-y: auto;
-            color: #374151;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         body::before {
             content: '';
@@ -38,17 +39,17 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
             z-index: -1;
             pointer-events: none;
         }
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0.75rem 0.75rem 1.5rem;
+            padding: 2rem 1.5rem;
         }
         .flex {
             display: flex;
@@ -96,7 +97,7 @@
             margin-bottom: 0.25rem;
         }
         .mb-3 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
         .mb-4 {
             margin-bottom: 0.75rem;
@@ -177,16 +178,16 @@
             font-weight: 700;
         }
         .text-gray-500 {
-            color: #6b7280;
+            color: #9ca3af;
         }
         .text-gray-600 {
-            color: #4b5563;
+            color: #d1d5db;
         }
         .text-gray-700 {
-            color: #374151;
+            color: #e5e7eb;
         }
         .text-gray-800 {
-            color: #1f2937;
+            color: #f9fafb;
         }
         .text-white {
             color: #ffffff;
@@ -222,9 +223,13 @@
             flex-wrap: wrap;
         }
         .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 0.5rem 0;
         }
         .hidden {
             display: none;
@@ -237,27 +242,35 @@
             .sm-inline {
                 display: inline;
             }
-            .search-input-container {
-                flex-direction: row;
-            }
             .footer-card .flex {
                 flex-direction: row;
             }
         }
         .glass-effect {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                0 -1px 0 rgba(0, 0, 0, 0.2) inset;
         }
         .tool-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
             text-decoration: none;
             transform-origin: center;
-            cursor: pointer;
-            color: #000000;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.05) inset;
+            flex-shrink: 0;
+            min-width: 100px;
+            white-space: nowrap;
         }
         .tool-btn::before {
             content: '';
@@ -266,117 +279,81 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .tool-btn:hover::before {
             left: 100%;
         }
         .tool-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
         }
         .tool-btn:active {
             transform: translateY(-2px) scale(1.01);
         }
-        .search-container {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-        }
-        .search-input {
-            background: rgba(255, 255, 255, 0.98);
-            border: 2px solid rgba(16, 185, 129, 0.25);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1), inset 0 2px 8px rgba(0, 0, 0, 0.05);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1f2937;
-            backdrop-filter: blur(10px);
-        }
-        .search-input:focus {
-            border-color: rgba(16, 185, 129, 0.7);
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15), 0 8px 25px rgba(16, 185, 129, 0.25);
-            background: rgba(255, 255, 255, 1);
-            transform: translateY(-1px);
-            outline: none;
-        }
-        .search-input:hover {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15), inset 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        .search-input::placeholder {
-            color: #9ca3af;
-            font-weight: 400;
-        }
-        .search-btn {
-            background: linear-gradient(135deg, #086848 0%, #036143 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .search-btn:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
-        }
-        .search-btn:active {
-            transform: translateY(0);
-        }
         .header-card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem 3rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                0 -1px 0 rgba(0, 0, 0, 0.2) inset;
         }
         .time-display {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .time-display:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-        .tools-section {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
             padding: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            margin-bottom: 0.5rem;
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.05) inset;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .time-display:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 1px 0 rgba(255, 255, 255, 0.08) inset;
+        }
+        .tools-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem 3rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                0 -1px 0 rgba(0, 0, 0, 0.2) inset;
         }
         .section-divider {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
             height: 1px;
-            margin: 0.5rem 0;
+            margin: 1rem 0;
             border-radius: 1px;
         }
         .footer-card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 0.75rem;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                0 -1px 0 rgba(0, 0, 0, 0.2) inset;
         }
         .animate-fade-in {
             animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -408,25 +385,17 @@
         /* Enhanced text styles */
         .text-white {
             color: #ffffff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         .text-gray-800 {
-            color: #1a202c;
+            color: #f9fafb;
             font-weight: 600;
         }
         .text-gray-600 {
-            color: #4a5568;
+            color: #d1d5db;
         }
         .text-gray-700 {
-            color: #2d3748;
-        }
-        
-        /* Improved tools grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            color: #e5e7eb;
         }
         
         /* SVG icon styles */
@@ -434,10 +403,6 @@
             flex-shrink: 0;
         }
         .tool-btn svg {
-            width: 16px;
-            height: 16px;
-        }
-        .search-btn svg {
             width: 16px;
             height: 16px;
         }
@@ -466,14 +431,14 @@
         .day-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #1f2937;
+            color: #f9fafb;
             margin: 0 0 0.25rem 0;
             line-height: 1.1;
         }
         
         .date-subtitle {
             font-size: 0.95rem;
-            color: #6b7280;
+            color: #d1d5db;
             font-weight: 500;
             margin: 0;
         }
@@ -494,53 +459,58 @@
         .time-label {
             font-size: 0.9rem;
             font-weight: 600;
-            color: #374151;
+            color: #e5e7eb;
         }
         
         .time-value {
             font-size: 1rem;
             font-weight: 700;
-            color: #1f2937;
+            color: #f9fafb;
             margin-left: 0;
         }
         
         /* Bookmarks Section */
         .bookmarks-section {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem 3rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                0 -1px 0 rgba(0, 0, 0, 0.2) inset;
         }
         
         .bookmarks-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
+            gap: 1rem;
             justify-content: center;
-            margin-bottom: 0.5rem;
-            min-height: 35px;
+            margin-bottom: 1rem;
+            min-height: 50px;
         }
         
         .bookmark-item {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.2) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            padding: 0.4rem 0.6rem;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
             text-decoration: none;
-            color: #374151;
+            color: #ffffff;
             font-weight: 500;
-            font-size: 0.7rem;
-            transition: all 0.25s ease;
+            font-size: 0.875rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            min-width: 100px;
-            max-width: 140px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            gap: 0.75rem;
+            min-width: 120px;
+            max-width: 160px;
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.05) inset;
             overflow: hidden;
             cursor: pointer;
             user-select: none;
@@ -566,8 +536,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.4s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .bookmark-item:hover::before {
@@ -575,11 +545,13 @@
         }
         
         .bookmark-item:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.3) 100%);
-            color: #1f2937;
-            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 12px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
         }
         
         .bookmark-item:active {
@@ -587,24 +559,28 @@
         }
         
         .bookmark-icon {
-            font-size: 0.85rem;
+            font-size: 1rem;
             flex-shrink: 0;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 4px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
         }
         
         .bookmark-item:hover .bookmark-icon {
-            background: rgba(255, 255, 255, 0.8);
-            transform: scale(1.05);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.15) inset;
         }
         
         .bookmark-name {
@@ -652,20 +628,20 @@
         }
         
         .add-bookmark-btn {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.2) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background:  transparent;
+           
+            border: 0px  ;
             border-radius: 8px;
             padding: 0.4rem 0.6rem;
-            transition: all 0.25s ease;
+           
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            color: #374151;
-            font-weight: 500;
+             
+         
             font-size: 0.7rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          
             position: relative;
             overflow: hidden;
         }
@@ -687,10 +663,10 @@
         
         .add-bookmark-btn:hover {
             transform: translateY(-1px) scale(1.01);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 100%);
-            border-color: rgba(255, 255, 255, 0.4);
-            color: #1f2937;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.8) 100%);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #f9fafb;
         }
         
         .add-bookmark-btn svg {
@@ -711,109 +687,110 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            animation: modalFadeIn 0.3s ease-out;
-        }
-        
-        .bookmark-modal.show {
-            display: flex;
+            animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .modal-content {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(25px);
-            border: 2px solid rgba(139, 92, 246, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 450px;
+            padding: 2.5rem 3rem;
+            max-width: 520px;
             width: 95%;
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(139, 92, 246, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transform: translateY(-20px);
-            animation: modalSlideIn 0.3s ease-out forwards;
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+            position: relative;
+            overflow: hidden;
         }
         
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
         
-        @keyframes modalSlideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(-30px) scale(0.95);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+   
         
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 2rem;
-            color: #1f2937;
+            color: #f9fafb;
             text-align: center;
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.025em;
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 0.75rem;
-            color: #1f2937;
+            color: #e5e7eb;
             font-weight: 600;
             font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        
         .form-group input {
-            width: 90%;
-            padding: 1rem;
-            border: 2px solid rgba(139, 92, 246, 0.3);
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
-            background: rgba(139, 92, 246, 0.08);
-            color: #1f2937;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            color: #ffffff;
             font-size: 1rem;
             font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             box-shadow: 
-                0 2px 4px rgba(139, 92, 246, 0.1),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.05) inset;
+            outline: none;
+            box-sizing: border-box;
         }
         
         .form-group input:focus {
             outline: none;
-            border-color: #8b5cf6;
+            border-color: rgba(255, 255, 255, 0.15);
             box-shadow: 
-                0 0 0 4px rgba(139, 92, 246, 0.15),
-                0 4px 12px rgba(139, 92, 246, 0.2),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
-            background: rgba(139, 92, 246, 0.12);
-            transform: translateY(-1px);
+                0 0 0 4px rgba(255, 255, 255, 0.05),
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
         }
         
         .form-group input:hover {
-            border-color: rgba(139, 92, 246, 0.5);
-            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.25),
+                0 1px 0 rgba(255, 255, 255, 0.08) inset;
         }
         
         .form-group input::placeholder {
-            color: #9ca3af;
+            color: rgba(255, 255, 255, 0.4);
             font-weight: 400;
         }
         
@@ -821,42 +798,66 @@
             display: flex;
             gap: 1rem;
             justify-content: flex-end;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
         
         .cancel-btn, .save-btn {
-            padding: 0.875rem 1.75rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 12px;
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 90px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            min-width: 100px;
+            position: relative;
+            overflow: hidden;
         }
         
         .cancel-btn {
-            background: rgba(107, 114, 128, 0.15);
-            color: #6b7280;
-            border: 2px solid rgba(107, 114, 128, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.05) inset;
+        }
+        
+        .cancel-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .cancel-btn:hover::before {
+            left: 100%;
         }
         
         .cancel-btn:hover {
-            background: rgba(107, 114, 128, 0.25);
-            border-color: rgba(107, 114, 128, 0.4);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 12px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+            color: #ffffff;
         }
         
         .save-btn {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            color: white;
-            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 
-                0 4px 12px rgba(139, 92, 246, 0.3),
-                0 2px 4px rgba(139, 92, 246, 0.2);
-            position: relative;
-            overflow: hidden;
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.05) inset;
         }
         
         .save-btn::before {
@@ -866,27 +867,39 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .save-btn:hover {
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            transform: translateY(-2px);
-            box-shadow: 
-                0 6px 20px rgba(139, 92, 246, 0.4),
-                0 4px 8px rgba(139, 92, 246, 0.3);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .save-btn:hover::before {
             left: 100%;
         }
         
-        .save-btn:active {
-            transform: translateY(-1px);
+        .save-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 
-                0 4px 12px rgba(139, 92, 246, 0.3),
-                0 2px 4px rgba(139, 92, 246, 0.2);
+                0 12px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+        }
+        
+        .save-btn:active, .cancel-btn:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+        
+        @keyframes modalFadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95);
+                backdrop-filter: blur(0px);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+                backdrop-filter: blur(20px);
+            }
         }
 
         @media (max-width: 768px) {
@@ -906,25 +919,24 @@
             .tools-section {
                 padding: 0.75rem;
             }
-            .search-container {
-                padding: 0.75rem;
-            }
             .search-input-container {
                 flex-direction: column;
                 gap: 0.5rem;
             }
-            .search-btn {
-                width: 100%;
-                justify-content: center;
-                padding: 0.5rem 0.75rem;
-            }
             .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
+                display: flex;
+                justify-content: flex-start;
                 gap: 0.5rem;
+                overflow-x: auto;
+                padding: 0.5rem;
+                -webkit-overflow-scrolling: touch;
+                flex-wrap: nowrap;
             }
             .tool-btn {
                 padding: 0.5rem;
                 font-size: 0.75rem;
+                min-width: 100px;
+                flex-shrink: 0;
             }
             .time-display {
                 padding: 0.5rem;
@@ -998,8 +1010,32 @@
                 gap: 0.3rem;
             }
             .modal-content {
-                padding: 1rem;
-                margin: 0.75rem;
+                padding: 1.5rem 1.25rem;
+                margin: 1rem;
+                border-radius: 16px;
+                max-width: none;
+                width: calc(100% - 2rem);
+            }
+            .modal-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .form-group {
+                margin-bottom: 1.25rem;
+            }
+            .form-group input {
+                padding: 0.875rem 1rem;
+                font-size: 0.95rem;
+            }
+            .modal-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-top: 1.5rem;
+            }
+            .cancel-btn, .save-btn {
+                padding: 0.875rem 1.5rem;
+                width: 100%;
+                font-size: 0.9rem;
             }
             .text-lg { font-size: 1rem; }
             .text-xl { font-size: 1.125rem; }
@@ -1048,20 +1084,14 @@
                 padding: 0.25rem 0.5rem;
                 font-size: 0.625rem;
             }
-            .search-input {
-                padding: 0.5rem;
-            }
-            .search-btn {
-                padding: 0.5rem;
-            }
         }
 
         @media (min-width: 769px) {
             .tools-grid {
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: center;
-                gap: 1rem;
+                gap: 1.75rem;
+                flex-wrap: nowrap;
             }
             .text-lg { font-size: 1.125rem; }
             .text-xl { font-size: 1.25rem; }
@@ -1121,16 +1151,6 @@
                 font-size: 1.5rem;
                 line-height: 2rem;
             }
-            .search-input {
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
-                line-height: 1.5rem;
-            }
-            .search-btn {
-                padding: 0.75rem 1.5rem;
-                font-size: 1rem;
-                line-height: 1.5rem;
-            }
             .tool-btn {
                 padding: 0.75rem 1rem;
                 font-size: 1rem;
@@ -1176,47 +1196,47 @@
                 </div>
                 <div class="tools-grid">
                     <a href="https://youtube.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-red-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                         </svg>
-                        <span class="font-semibold text-sm">YouTube</span>
+                        <span class="font-semibold text-sm text-white">YouTube</span>
                     </a>
                     <a href="https://facebook.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-blue-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
-                        <span class="font-semibold text-sm">Facebook</span>
+                        <span class="font-semibold text-sm text-white">Facebook</span>
                     </a>
                     <a href="https://gmail.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-red-400 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
                         </svg>
-                        <span class="font-semibold text-sm">Gmail</span>
+                        <span class="font-semibold text-sm text-white">Gmail</span>
                     </a>
                     <a href="https://outlook.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-blue-400 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M7.462 0C5.54 0 4 1.54 4 3.462V20.54C4 22.46 5.54 24 7.462 24h9.076C18.46 24 20 22.46 20 20.538V7.385h-4.615C14.54 7.385 13.846 6.692 13.846 5.846V0H7.462zM0 4.615v14.77C0 20.692.692 21.385 1.54 21.385h1.846V4.615H0zM15.385 0v5.846h4.615L15.385 0z"/>
                         </svg>
-                        <span class="font-semibold text-sm">Outlook</span>
+                        <span class="font-semibold text-sm text-white">Outlook</span>
                     </a>
                     <a href="https://linkedin.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-blue-600 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>
-                        <span class="font-semibold text-sm">LinkedIn</span>
+                        <span class="font-semibold text-sm text-white">LinkedIn</span>
                     </a>
                     <a href="https://atlassian.net" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-blue-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M11.53 2c0-.28.22-.5.5-.5s.5.22.5.5l-.02 7.54c0 .28-.22.5-.5.5s-.5-.22-.5-.5L11.53 2zM12.5 14.5c0-.28-.22-.5-.5-.5s-.5.22-.5.5l.02 7.54c0 .28.22.5.5.5s.5-.22.5-.5L12.5 14.5z"/>
                             <path d="M7.5 6.5c0-.28.22-.5.5-.5s.5.22.5.5v11c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-11zM16.5 6.5c0-.28-.22-.5-.5-.5s-.5.22-.5.5v11c0 .28.22.5.5.5s.5-.22.5-.5v-11z"/>
                         </svg>
-                        <span class="font-semibold text-sm">Jira</span>
+                        <span class="font-semibold text-sm text-white">Jira</span>
                     </a>
                       <a href="https://chat.openai.com" class="tool-btn glass-effect px-3 py-2 rounded-lg flex items-center gap-2">
-                        <svg class="text-green-500 text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="text-white text-sm" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142-.0852 4.783-2.7582a.7712.7712 0 0 0 .7806 0l5.8428 3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
                         </svg>
-                        <span class="font-semibold text-sm">ChatGPT</span>
+                        <span class="font-semibold text-sm text-white">ChatGPT</span>
                     </a>
                 </div>
             </div>
@@ -1227,19 +1247,19 @@
         <!-- Bookmarks Section -->
         <div class="bookmarks-section mb-3 animate-slide-up">
             <div class="text-center mb-2">
-                <h3 class="text-lg font-bold text-gray-800 mb-1">My Bookmarks</h3>
+                <h3 class="text-lg font-bold text-gray-800 mb-1">My Bookmarks   <button id="addBookmarkBtn" class="add-bookmark-btn   px-3 py-2 rounded-lg text-gray-700 font-semibold text-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                    </svg>
+                   
+                </button></h3>
                 <div class="section-divider"></div>
             </div>
             <div class="bookmarks-container" id="bookmarksContainer">
                 <!-- Bookmarks will be loaded here -->
             </div>
             <div class="bookmark-controls">
-                <button id="addBookmarkBtn" class="add-bookmark-btn glass-effect px-3 py-2 rounded-lg text-gray-700 font-semibold text-sm">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-                    </svg>
-                    Add Bookmark
-                </button>
+              
             </div>
         </div>
 
@@ -1268,51 +1288,7 @@
             </div>
         </div>
 
-        <!-- Search Section -->
-        <div class="search-container mb-3 animate-slide-up">
-            <div class="text-center mb-2">
-                <h2 class="text-lg font-bold text-gray-800 mb-1">Search</h2>
-                <div class="section-divider"></div>
-            </div>
-            
-            <form action="https://www.google.com/search" method="get" target="_blank" class="search-input-container flex flex-col gap-3 mb-4">
-                <input 
-                    type="text" 
-                    name="q"
-                    placeholder="What are you looking for today?" 
-                    class="search-input flex-1 px-4 py-3 rounded-lg text-gray-700 font-medium text-base"
-                    autocomplete="off"
-                    required
-                >
-                <button 
-                    type="submit"
-                    class="search-btn px-6 py-3 text-white rounded-lg font-bold text-base flex items-center gap-2 justify-center"
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.384,21.619,16.855,15.09a9.284,9.284,0,1,0-1.768,1.768l6.529,6.529a1.266,1.266,0,0,0,1.768,0A1.251,1.251,0,0,0,23.384,21.619ZM9.625,18.25A8.625,8.625,0,1,1,18.25,9.625,8.635,8.635,0,0,1,9.625,18.25Z"/>
-                    </svg>
-                    <span class="sm-inline">Search</span>
-                </button>
-            </form>
-        </div>
-                
-            </div>
-
-         
-        </div>
-
-        <!-- Footer -->
-        <div class="footer-card text-center animate-slide-up">
-            <div class="flex flex-col items-center gap-2 text-gray-600 text-sm">
-                <div class="flex items-center gap-2">
-                    <svg class="text-gray-500" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
-                    </svg>
-                    <span class="font-medium">Develop by Adnan</span>
-                </div>
-                <span class="px-2 py-1 bg-gray-600 text-white text-xs rounded-full font-bold">v2.1</span>
-            </div>
-        </div>
+     
     </div>
     
     <script src="clock.js"></script>
