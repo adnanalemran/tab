@@ -32,9 +32,31 @@ class BookmarkManager {
     }
 
     removeBookmark(id) {
-        this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
-        this.saveBookmarks();
-        this.renderBookmarks();
+        const bookmark = this.bookmarks.find(b => b.id === id);
+        if (!bookmark) return;
+        
+        // Show confirmation dialog
+        if (confirm(`Are you sure you want to delete "${bookmark.name}"?`)) {
+            this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
+            this.saveBookmarks();
+            this.renderBookmarks();
+            
+            // Show success message briefly
+            this.showNotification('Bookmark deleted successfully!', 'success');
+        }
+    }
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `bookmark-notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => notification.classList.add('show'), 100);
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
     }
 
     renderBookmarks() {
@@ -47,12 +69,37 @@ class BookmarkManager {
         }
 
         container.innerHTML = this.bookmarks.map(bookmark => `
-            <a href="${bookmark.url}" class="bookmark-item" target="_blank" rel="noopener noreferrer">
-                <span class="bookmark-icon">${bookmark.icon}</span>
-                <span class="bookmark-name">${bookmark.name}</span>
-                <button class="bookmark-delete" onclick="event.preventDefault(); event.stopPropagation(); bookmarkManager.removeBookmark(${bookmark.id})">×</button>
-            </a>
+            <div class="bookmark-item" data-bookmark-id="${bookmark.id}">
+                <a href="${bookmark.url}" class="bookmark-link" target="_blank" rel="noopener noreferrer">
+                    <span class="bookmark-icon">${bookmark.icon}</span>
+                    <span class="bookmark-name">${bookmark.name}</span>
+                </a>
+                <button class="bookmark-delete" 
+                        data-bookmark-id="${bookmark.id}"
+                        data-bookmark-name="${bookmark.name}"
+                        title="Delete '${bookmark.name}'"
+                        aria-label="Delete bookmark ${bookmark.name}">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
         `).join('');
+        
+        // Add event listeners for delete buttons
+        this.attachDeleteListeners();
+    }
+
+    attachDeleteListeners() {
+        const deleteButtons = document.querySelectorAll('.bookmark-delete');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = parseInt(button.dataset.bookmarkId);
+                this.removeBookmark(id);
+            });
+        });
     }
 }
 

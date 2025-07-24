@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#8b5cf6">
     <meta name="msapplication-navbutton-color" content="#8b5cf6">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Dev by Adnan</title>
+    <title>New tab || Adnan</title>
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,9 +47,11 @@
         }
         .container {
             width: 100%;
-            max-width: 1400px;
+            max-width: none;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 2% 3%;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
         .flex {
             display: flex;
@@ -225,17 +227,18 @@
         .tools-grid {
             display: flex;
             justify-content: center;
-            gap: 1.25rem;
-            margin-top: 1rem;
+            gap: 0.5%;
+            margin-top: 1%;
             flex-wrap: nowrap;
-            overflow-x: auto;
-            padding: 0.25rem 0;
+            padding: 0.3% 0;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            width: 100%;
+            overflow-x: auto;
         }
         
         .tools-grid::-webkit-scrollbar {
-            height: 4px;
+            height: 3px;
         }
         
         .tools-grid::-webkit-scrollbar-track {
@@ -281,7 +284,7 @@
             overflow: hidden;
             text-decoration: none;
             transform-origin: center;
-            border-radius: 14px;
+            border-radius: 12px;
             background: linear-gradient(135deg, 
                 rgba(255, 255, 255, 0.08) 0%, 
                 rgba(255, 255, 255, 0.04) 50%, 
@@ -289,14 +292,23 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(25px) saturate(180%);
             box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.25),
-                0 2px 0 rgba(255, 255, 255, 0.08) inset,
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.08) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
-            flex-shrink: 0;
-            min-width: 110px;
+            flex: 0 0 13%;
+            width: 13%;
             white-space: nowrap;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
+            padding: 0.8% 1%;
+            margin: 0.3%;
+            box-sizing: border-box;
+            font-size: 0.8rem;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
         }
         
         .tool-btn span {
@@ -343,24 +355,29 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(40px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem 3rem;
+            border-radius: 16px;
+            padding: 1.5% 2.5%;
+            margin-bottom: 1.5%;
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.3),
                 0 1px 0 rgba(255, 255, 255, 0.1) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+            width: 100%;
+            box-sizing: border-box;
         }
         .time-display {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
+            padding: 1.5% 2%;
+            margin-bottom: 1%;
             box-shadow: 
                 0 4px 16px rgba(0, 0, 0, 0.2),
                 0 1px 0 rgba(255, 255, 255, 0.05) inset;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            width: 100%;
+            box-sizing: border-box;
         }
         .time-display:hover {
             transform: translateY(-3px);
@@ -376,14 +393,17 @@
                 rgba(255, 255, 255, 0.03) 100%);
             backdrop-filter: blur(50px) saturate(200%);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
-            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            padding: 1.5% 2%;
+            margin-bottom: 1.5%;
             box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.35),
+                0 8px 32px rgba(0, 0, 0, 0.3),
                 0 2px 0 rgba(255, 255, 255, 0.12) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .tools-section::before {
@@ -470,11 +490,22 @@
             flex-shrink: 0;
         }
         .tool-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: 2;
             position: relative;
+            flex-shrink: 0;
+        }
+        
+        .tool-btn span {
+            z-index: 2;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            font-size: 0.75rem;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .footer-card svg {
@@ -492,11 +523,13 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 1.5rem;
+            gap: 3%;
+            width: 100%;
         }
         
         .date-section {
-            flex: 1;
+            flex: 1 1 50%;
+            min-width: 0;
         }
         
         .day-title {
@@ -515,11 +548,12 @@
         }
         
         .times-section {
-            flex: 1;
+            flex: 1 1 50%;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1%;
             text-align: right;
+            min-width: 0;
         }
         
         .time-row {
@@ -545,21 +579,46 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(40px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem 3rem;
+            border-radius: 16px;
+            padding: 1.5% 2%;
+            margin-bottom: 1.5%;
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.3),
                 0 1px 0 rgba(255, 255, 255, 0.1) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .bookmarks-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
+            flex-wrap: nowrap;
+            gap: 0.5%;
             justify-content: center;
-            margin-bottom: 1rem;
-            min-height: 50px;
+            margin-bottom: 1.5%;
+            min-height: 40px;
+            width: 100%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .bookmarks-container::-webkit-scrollbar {
+            height: 3px;
+        }
+        
+        .bookmarks-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+        }
+        
+        .bookmarks-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+        
+        .bookmarks-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
         
         .bookmark-item {
@@ -569,28 +628,38 @@
                 rgba(255, 255, 255, 0.02) 100%);
             backdrop-filter: blur(25px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 0.5rem 0.75rem;
-            text-decoration: none;
-            color: #ffffff;
+            border-radius: 12px;
+            padding: 0.8% 1%;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            min-width: 110px;
-            max-width: 180px;
+            gap: 0.3rem;
+            flex: 0 0 13%;
+            width: 13%;
             box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.25),
-                0 2px 0 rgba(255, 255, 255, 0.08) inset,
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.08) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
             overflow: hidden;
-            cursor: pointer;
             user-select: none;
             transform-origin: center;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
+            margin: 0.3%;
+            box-sizing: border-box;
+            min-height: 40px;
+        }
+
+        .bookmark-link {
+            text-decoration: none;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            cursor: pointer;
         }
         
         .bookmark-item.dragging {
@@ -616,26 +685,25 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
             transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        
-        .bookmark-item:active {
-            transform: translateY(-4px) scale(1.02);
-            transition: all 0.1s ease;
+
+        .bookmark-item:hover::before {
+            left: 100%;
         }
         
         .bookmark-icon {
-            font-size: 1rem;
+            font-size: 0.9rem;
             flex-shrink: 0;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, 
                 rgba(255, 255, 255, 0.15) 0%, 
                 rgba(255, 255, 255, 0.08) 100%);
-            border-radius: 6px;
+            border-radius: 5px;
             box-shadow: 
-                0 3px 12px rgba(0, 0, 0, 0.25),
+                0 2px 8px rgba(0, 0, 0, 0.2),
                 0 1px 0 rgba(255, 255, 255, 0.15) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -650,41 +718,137 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             z-index: 2;
             position: relative;
+            font-size: 0.75rem;
         }
         
         .bookmark-delete {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 16px;
-            height: 16px;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
             background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
             border-radius: 50%;
-            border: 1px solid white;
-            font-size: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 1px 4px rgba(239, 68, 68, 0.3);
-            transition: all 0.25s ease;
+            box-shadow: 
+                0 3px 12px rgba(239, 68, 68, 0.4),
+                0 1px 0 rgba(255, 255, 255, 0.2) inset;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: 10;
+            backdrop-filter: blur(10px);
         }
         
         .bookmark-delete:hover {
             background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: scale(1.05);
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 
+                0 6px 20px rgba(239, 68, 68, 0.6),
+                0 0 0 2px rgba(255, 255, 255, 0.3),
+                0 2px 0 rgba(255, 255, 255, 0.3) inset;
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        .bookmark-delete:active {
+            transform: scale(1.05) rotate(90deg);
+            transition: all 0.1s ease;
+        }
+
+        .bookmark-delete svg {
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .bookmark-delete:hover svg {
+            transform: rotate(90deg);
         }
         
         .bookmark-item:hover .bookmark-delete {
             display: flex;
+            animation: deleteButtonAppear 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes deleteButtonAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-90deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Notification Styles */
+        .bookmark-notification {
+            position: fixed;
+            top: 2%;
+            right: 2%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2% 3%;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1) inset;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            min-width: 15%;
+            max-width: 25%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .bookmark-notification.show {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .bookmark-notification.success {
+            border-left: 4px solid #48bb78;
+            background: linear-gradient(135deg, 
+                rgba(72, 187, 120, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 100%);
+        }
+
+        .bookmark-notification.error {
+            border-left: 4px solid #ef4444;
+            background: linear-gradient(135deg, 
+                rgba(239, 68, 68, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 100%);
+        }
+
+        /* Enhanced bookmark item hover effects */
+        .bookmark-item:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 12px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.15),
+                0 2px 0 rgba(255, 255, 255, 0.12) inset;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.12) 0%, 
+                rgba(255, 255, 255, 0.06) 50%, 
+                rgba(255, 255, 255, 0.03) 100%);
+        }
+
+        .bookmark-item:active {
+            transform: translateY(-1px) scale(1.01);
+            transition: all 0.1s ease;
         }
         
         .bookmark-controls {
@@ -748,15 +912,18 @@
             backdrop-filter: blur(40px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
-            padding: 2.5rem 3rem;
-            max-width: 520px;
-            width: 95%;
+            padding: 4% 5%;
+            max-width: 90%;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 0 1px 0 rgba(255, 255, 255, 0.08) inset,
                 0 -1px 0 rgba(0, 0, 0, 0.3) inset;
             position: relative;
             overflow: hidden;
+            box-sizing: border-box;
         }
         
         .modal-content::before {
@@ -786,12 +953,13 @@
         }
         
         .form-group {
-            margin-bottom: 1.75rem;
+            margin-bottom: 3%;
+            width: 100%;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.75rem;
+            margin-bottom: 2%;
             color: #e5e7eb;
             font-weight: 600;
             font-size: 0.875rem;
@@ -801,7 +969,7 @@
         }
         .form-group input {
             width: 100%;
-            padding: 1rem 1.25rem;
+            padding: 2% 3%;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.03);
@@ -954,56 +1122,45 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 0.5rem;
+                padding: 2% 4%;
             }
             .header-card {
-                padding: 0.75rem;
+                padding: 4% 5%;
+                margin-bottom: 3%;
             }
             .header-card .flex {
                 flex-direction: column;
-                gap: 0.75rem;
+                gap: 3%;
                 text-align: center;
             }
             .tools-section {
-                padding: 1rem 1.25rem;
+                padding: 3% 4%;
+                margin-bottom: 3%;
             }
-            .search-input-container {
-                flex-direction: column;
-                gap: 0.5rem;
+            .bookmarks-section {
+                padding: 4% 5%;
+                margin-bottom: 3%;
             }
             .tools-grid {
-                display: flex;
-                justify-content: flex-start;
-                gap: 0.75rem;
-                overflow-x: auto;
-                padding: 0.25rem;
-                -webkit-overflow-scrolling: touch;
-                flex-wrap: nowrap;
-                margin-top: 0.75rem;
+                flex-direction: column;
+                gap: 2%;
+                margin-top: 2%;
             }
             .tool-btn {
-                padding: 0.625rem 0.75rem;
-                font-size: 0.8rem;
-                min-width: 105px;
-                flex-shrink: 0;
-                border-radius: 12px;
+                min-width: 90%;
+                max-width: 95%;
+                padding: 3% 4%;
+                font-size: 0.9rem;
+                margin: 1% 0;
+                text-align: center;
             }
             .time-display {
-                padding: 0.5rem;
+                padding: 2% 3%;
+                margin-bottom: 2%;
             }
-            .time-zones-container {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .time-zones-container .time-display {
-                min-width: auto;
-                max-width: none;
-            }
-            
-            /* New responsive design */
             .time-layout {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 3%;
                 text-align: center;
             }
             .day-title {
@@ -1015,125 +1172,142 @@
             .times-section {
                 text-align: center;
             }
-            .time-row {
-                display: block;
-                margin-bottom: 0.25rem;
-            }
-            .time-label {
-                font-size: 0.8rem;
-            }
-            .time-value {
-                font-size: 0.9rem;
-            }
-            
-            /* Bookmarks responsive */
-            .bookmarks-section {
-                padding: 1.5rem;
-            }
             .bookmarks-container {
-                gap: 0.75rem;
-                min-height: 40px;
+                flex-direction: column;
+                gap: 2%;
+                align-items: center;
             }
             .bookmark-item {
-                min-width: 105px;
-                max-width: 120px;
-                padding: 0.625rem 0.75rem;
-                font-size: 0.8rem;
-                gap: 0.5rem;
-                border-radius: 12px;
-            }
-            .bookmark-icon {
-                width: 18px;
-                height: 18px;
-                font-size: 0.85rem;
-                border-radius: 5px;
+                min-width: 85%;
+                max-width: 90%;
+                padding: 3% 4%;
+                font-size: 0.9rem;
+                margin: 1% 0;
             }
             .bookmark-delete {
-                width: 12px;
-                height: 12px;
-                top: -4px;
-                right: -4px;
-                font-size: 8px;
+                width: 18px;
+                height: 18px;
+                top: -6px;
+                right: -6px;
+                font-size: 10px;
+                border-width: 1.5px;
             }
-            .add-bookmark-btn {
-                padding: 0.3rem 0.4rem;
-                font-size: 0.6rem;
-                gap: 0.3rem;
+            
+            .bookmark-delete svg {
+                width: 8px;
+                height: 8px;
+            }
+            
+            /* Show delete button on mobile without hover */
+            .bookmark-item:hover .bookmark-delete,
+            .bookmark-item .bookmark-delete {
+                display: flex;
+                opacity: 0.7;
+            }
+            
+            .bookmark-item:hover .bookmark-delete {
+                opacity: 1;
             }
             .modal-content {
-                padding: 1.5rem 1.25rem;
-                margin: 1rem;
-                border-radius: 16px;
-                max-width: none;
-                width: calc(100% - 2rem);
+                padding: 5% 6%;
+                margin: 5%;
+                max-width: 90%;
+                width: 90%;
             }
             .modal-title {
                 font-size: 1.5rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 4%;
             }
             .form-group {
-                margin-bottom: 1.25rem;
+                margin-bottom: 4%;
             }
             .form-group input {
-                padding: 0.875rem 1rem;
+                padding: 3% 4%;
                 font-size: 0.95rem;
             }
             .modal-buttons {
                 flex-direction: column;
-                gap: 0.75rem;
-                margin-top: 1.5rem;
+                gap: 3%;
+                margin-top: 5%;
             }
             .cancel-btn, .save-btn {
-                padding: 0.875rem 1.5rem;
+                padding: 3% 5%;
                 width: 100%;
                 font-size: 0.9rem;
             }
-            .text-lg { font-size: 1rem; }
-            .text-xl { font-size: 1.125rem; }
-            .text-2xl { font-size: 1.25rem; }
-            .text-3xl { font-size: 1.5rem; }
-            .text-4xl { font-size: 1.75rem; }
-            .mb-3 { margin-bottom: 0.5rem; }
-            .mb-4 { margin-bottom: 0.75rem; }
-            .px-4 { padding-left: 0.75rem; padding-right: 0.75rem; }
-            .py-3 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+            .bookmark-notification {
+                top: 3%;
+                right: 3%;
+                min-width: 40%;
+                max-width: 70%;
+                padding: 3% 4%;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
+            .container {
+                padding: 2% 3%;
+            }
+            .header-card, .tools-section, .bookmarks-section {
+                padding: 4% 4%;
+                margin-bottom: 4%;
+            }
             .tools-grid {
-                grid-template-columns: 1fr;
-                gap: 0.375rem;
-            }
-            .header-card h1 {
-                font-size: 1.75rem;
-            }
-            .time-display {
-                padding: 0.25rem;
+                gap: 3%;
             }
             .tool-btn {
-                padding: 0.375rem 0.5rem;
-                font-size: 0.625rem;
+                min-width: 95%;
+                max-width: 100%;
+                padding: 4% 5%;
+                font-size: 0.8rem;
+                margin: 1.5% 0;
+            }
+            .bookmark-item {
+                min-width: 90%;
+                max-width: 95%;
+                padding: 4% 5%;
+                font-size: 0.8rem;
+                margin: 2% 0;
+            }
+            .day-title {
+                font-size: 1.5rem;
+            }
+            .modal-content {
+                padding: 6% 7%;
+                margin: 3%;
+                max-width: 94%;
+                width: 94%;
+            }
+            .form-group input {
+                padding: 4% 5%;
+                font-size: 0.9rem;
             }
         }
 
         @media (max-height: 700px) {
             .container {
-                padding: 0.5rem;
+                padding: 1% 2%;
             }
-            .header-card, .tools-section, .search-container, .footer-card {
-                margin-bottom: 0.5rem;
+            .header-card, .tools-section, .bookmarks-section {
+                margin-bottom: 1.5%;
+                padding: 2% 3%;
             }
-            .header-card h1 {
+            .day-title {
                 font-size: 1.5rem;
-                margin-bottom: 0.25rem;
+                margin-bottom: 1%;
             }
             .time-display {
-                padding: 0.25rem;
-                margin-bottom: 0.125rem;
+                padding: 1% 2%;
+                margin-bottom: 1%;
             }
             .tool-btn {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.625rem;
+                padding: 1% 2%;
+                font-size: 0.8rem;
+            }
+            .bookmark-item {
+                padding: 1% 2%;
+                font-size: 0.8rem;
             }
         }
 
@@ -1141,35 +1315,40 @@
             .tools-grid {
                 display: flex;
                 justify-content: center;
-                gap: 1.75rem;
+                gap: 0.5%;
                 flex-wrap: nowrap;
+                overflow-x: auto;
             }
-            .text-lg { font-size: 1.125rem; }
-            .text-xl { font-size: 1.25rem; }
-            .text-2xl { font-size: 1.5rem; }
-            .text-3xl { font-size: 1.875rem; }
-            .text-4xl { font-size: 2.25rem; }
-            .mb-3 { margin-bottom: 0.75rem; }
-            .mb-4 { margin-bottom: 1rem; }
-            .px-4 { padding-left: 1rem; padding-right: 1rem; }
-            .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-            .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .tool-btn {
+                flex: 0 0 13%;
+                width: 13%;
+                margin: 0.3%;
+                font-size: 0.8rem;
+                padding: 0.8% 1%;
+            }
+            .bookmark-item {
+                flex: 0 0 13%;
+                width: 13%;
+                margin: 0.3%;
+                font-size: 0.8rem;
+                padding: 0.8% 1%;
+            }
+            .bookmarks-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 0.5%;
+            }
             .container {
-                padding: 1rem 1rem 1.5rem;
+                padding: 1% 2%;
             }
         }
 
         @media (min-width: 1024px) {
-            .text-lg { font-size: 1.125rem; }
-            .text-xl { font-size: 1.25rem; }
-            .text-2xl { font-size: 1.5rem; }
-            .text-3xl { font-size: 1.875rem; }
-            .text-4xl { font-size: 2.25rem; }
-            .mb-3 { margin-bottom: 0.75rem; }
-            .mb-4 { margin-bottom: 1rem; }
-            .px-4 { padding-left: 1rem; padding-right: 1rem; }
-            .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-            .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .container {
+                padding: 1% 3%;
+                max-width: 95%;
+                margin: 0 auto;
+            }
             .header-card .flex {
                 flex-direction: row;
                 justify-content: space-between;
@@ -1182,34 +1361,78 @@
             .header-card .text-center:last-child {
                 text-align: right;
             }
-            .header-card h1 {
-                font-size: 2.25rem;
-                line-height: 2.5rem;
-            }
-            .header-card p {
-                font-size: 1.125rem;
-                line-height: 1.75rem;
-            }
-            .time-display .text-lg {
-                font-size: 1.25rem;
-                line-height: 1.75rem;
-            }
-            .tools-section h3 {
-                font-size: 1.25rem;
-                line-height: 1.75rem;
-            }
-            .search-container h2 {
-                font-size: 1.5rem;
-                line-height: 2rem;
+            .tools-grid {
+                gap: 0.5%;
+                justify-content: flex-start;
+                overflow-x: auto;
             }
             .tool-btn {
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
-                line-height: 1.5rem;
+                flex: 0 0 13%;
+                width: 13%;
+                padding: 0.8% 1%;
+                font-size: 0.8rem;
             }
-            .footer-card {
-                font-size: 1rem;
-                line-height: 1.5rem;
+            .bookmark-item {
+                flex: 0 0 13%;
+                width: 13%;
+                padding: 0.8% 1%;
+                font-size: 0.8rem;
+            }
+            .bookmarks-container {
+                gap: 0.5%;
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+            .modal-content {
+                max-width: 60%;
+                width: 60%;
+                padding: 3% 4%;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .container {
+                padding: 0.8% 2%;
+                max-width: 90%;
+            }
+            .tool-btn {
+                flex: 0 0 13%;
+                width: 13%;
+                padding: 0.6% 0.8%;
+                font-size: 0.8rem;
+            }
+            .bookmark-item {
+                flex: 0 0 13%;
+                width: 13%;
+                padding: 0.6% 0.8%;
+                font-size: 0.8rem;
+            }
+            .modal-content {
+                max-width: 50%;
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .container {
+                padding: 0.5% 1%;
+                max-width: 85%;
+            }
+            .tool-btn {
+                flex: 0 0 13%;
+                width: 13%;
+                padding: 0.4% 0.6%;
+                font-size: 0.8rem;
+            }
+            .bookmark-item {
+                flex: 0 0 13%;
+                width: 13%;
+                padding: 0.4% 0.6%;
+                font-size: 0.8rem;
+            }
+            .modal-content {
+                max-width: 40%;
+                width: 40%;
             }
         }
     </style>
