@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Dev by Adnan",
+  "name": "New Tab",
   "version": "1.0",
   "description": "Custom HTML/CSS homepage for Chrome.",
   "chrome_url_overrides": {
