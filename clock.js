@@ -24,8 +24,7 @@ function updateTime() {
         timeZone: 'Australia/Sydney',
         hour12: true,
         hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
+        minute: '2-digit'
     });
     const australiaDate = now.toLocaleDateString('en-US', {
         timeZone: 'Australia/Sydney',
@@ -39,8 +38,7 @@ function updateTime() {
         timeZone: 'Asia/Dhaka',
         hour12: true,
         hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
+        minute: '2-digit'
     });
     const bangladeshDate = now.toLocaleDateString('en-US', {
         timeZone: 'Asia/Dhaka',
