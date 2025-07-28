@@ -791,6 +791,53 @@
             z-index: 10;
             backdrop-filter: blur(10px);
         }
+
+        .bookmark-edit {
+            position: absolute;
+            top: -8px;
+            right: 16px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 3px 12px rgba(59, 130, 246, 0.4),
+                0 1px 0 rgba(255, 255, 255, 0.2) inset;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .bookmark-edit:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.1) rotate(-15deg);
+            box-shadow: 
+                0 6px 20px rgba(59, 130, 246, 0.6),
+                0 0 0 2px rgba(255, 255, 255, 0.3),
+                0 2px 0 rgba(255, 255, 255, 0.3) inset;
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        .bookmark-edit:active {
+            transform: scale(1.05) rotate(-15deg);
+            transition: all 0.1s ease;
+        }
+
+        .bookmark-edit svg {
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .bookmark-edit:hover svg {
+            transform: rotate(-15deg);
+        }
         
         .bookmark-delete:hover {
             background: linear-gradient(135deg, #dc2626, #b91c1c);
@@ -815,7 +862,8 @@
             transform: rotate(90deg);
         }
         
-        .bookmark-item:hover .bookmark-delete {
+        .bookmark-item:hover .bookmark-delete,
+        .bookmark-item:hover .bookmark-edit {
             display: flex;
             animation: deleteButtonAppear 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -1162,8 +1210,6 @@
         }
 
         @media (max-width: 768px) {
-
-        @media (max-width: 768px) {
             .container {
                 padding: 2% 4%;
             }
@@ -1183,6 +1229,27 @@
             .bookmarks-section {
                 padding: 4% 5%;
                 margin-bottom: 3%;
+            }
+            .bookmark-item {
+                flex: 0 0 18%;
+                width: 18%;
+                padding: 1% 1.2%;
+                margin: 0.5%;
+            }
+            .bookmarks-container {
+                gap: 0.8%;
+            }
+            .drag-handle {
+                font-size: 10px;
+                padding: 1px;
+            }
+            .bookmark-name {
+                font-size: 0.7rem;
+            }
+            .bookmark-icon {
+                width: 16px;
+                height: 16px;
+                font-size: 0.8rem;
             }
             .tools-grid {
                 flex-direction: column;
@@ -1241,14 +1308,17 @@
                 height: 8px;
             }
             
-            /* Show delete button on mobile without hover */
+            /* Show edit and delete buttons on mobile without hover */
             .bookmark-item:hover .bookmark-delete,
-            .bookmark-item .bookmark-delete {
+            .bookmark-item .bookmark-delete,
+            .bookmark-item:hover .bookmark-edit,
+            .bookmark-item .bookmark-edit {
                 display: flex;
                 opacity: 0.7;
             }
             
-            .bookmark-item:hover .bookmark-delete {
+            .bookmark-item:hover .bookmark-delete,
+            .bookmark-item:hover .bookmark-edit {
                 opacity: 1;
             }
             .modal-content {
@@ -1600,6 +1670,32 @@
                     <div class="modal-buttons">
                         <button type="button" id="cancelBookmarkBtn" class="cancel-btn">Cancel</button>
                         <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Bookmark Modal -->
+        <div class="bookmark-modal" id="editBookmarkModal">
+            <div class="modal-content glass-effect">
+                <h3 class="modal-title">Edit Bookmark</h3>
+                <form id="editBookmarkForm">
+                    <input type="hidden" id="editBookmarkId">
+                    <div class="form-group">
+                        <label for="editBookmarkName">Name:</label>
+                        <input type="text" id="editBookmarkName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editBookmarkUrl">URL:</label>
+                        <input type="url" id="editBookmarkUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editBookmarkIcon">Icon (optional):</label>
+                        <input type="text" id="editBookmarkIcon" placeholder="e.g., ⭐ or SVG">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="cancelEditBookmarkBtn" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Update</button>
                     </div>
                 </form>
             </div>

@@ -78,6 +78,15 @@ class BookmarkManager {
                     <span class="bookmark-icon">${bookmark.icon}</span>
                     <span class="bookmark-name">${bookmark.name}</span>
                 </a>
+                <button class="bookmark-edit" 
+                        data-bookmark-id="${bookmark.id}"
+                        title="Edit '${bookmark.name}'"
+                        aria-label="Edit bookmark ${bookmark.name}">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 20h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
                 <button class="bookmark-delete" 
                         data-bookmark-id="${bookmark.id}"
                         data-bookmark-name="${bookmark.name}"
@@ -92,6 +101,7 @@ class BookmarkManager {
         
         // Add event listeners for delete buttons and drag & drop
         this.attachDeleteListeners();
+        this.attachEditListeners();
         this.attachDragAndDropListeners();
         this.attachTouchListeners();
     }
@@ -108,13 +118,58 @@ class BookmarkManager {
         });
     }
 
+    attachEditListeners() {
+        const editButtons = document.querySelectorAll('.bookmark-edit');
+        editButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = parseInt(button.dataset.bookmarkId);
+                this.editBookmark(id);
+            });
+        });
+    }
+
+    editBookmark(id) {
+        const bookmark = this.bookmarks.find(b => b.id === id);
+        if (!bookmark) return;
+        
+        // Populate the edit modal with current values
+        document.getElementById('editBookmarkId').value = bookmark.id;
+        document.getElementById('editBookmarkName').value = bookmark.name;
+        document.getElementById('editBookmarkUrl').value = bookmark.url;
+        document.getElementById('editBookmarkIcon').value = bookmark.icon;
+        
+        // Show edit modal
+        document.getElementById('editBookmarkModal').style.display = 'flex';
+        document.getElementById('editBookmarkName').focus();
+        document.getElementById('editBookmarkName').select();
+    }
+
+    updateBookmark(id, name, url, icon) {
+        const bookmarkIndex = this.bookmarks.findIndex(b => b.id === id);
+        if (bookmarkIndex === -1) return;
+        
+        this.bookmarks[bookmarkIndex] = {
+            ...this.bookmarks[bookmarkIndex],
+            name: name.trim(),
+            url: url.trim(),
+            icon: icon.trim() || '🔖'
+        };
+        
+        this.saveBookmarks();
+        this.renderBookmarks();
+        this.showNotification('Bookmark updated successfully!', 'success');
+    }
+
     attachDragAndDropListeners() {
         const bookmarkItems = document.querySelectorAll('.bookmark-item');
         
         bookmarkItems.forEach(item => {
-            // Prevent dragging when clicking on link or delete button
+            // Prevent dragging when clicking on link, edit button, or delete button
             const link = item.querySelector('.bookmark-link');
             const deleteBtn = item.querySelector('.bookmark-delete');
+            const editBtn = item.querySelector('.bookmark-edit');
             
             if (link) {
                 link.addEventListener('dragstart', (e) => {
@@ -146,10 +201,27 @@ class BookmarkManager {
                 });
             }
 
+            if (editBtn) {
+                editBtn.addEventListener('dragstart', (e) => {
+                    e.preventDefault();
+                    return false;
+                });
+                
+                editBtn.addEventListener('mousedown', (e) => {
+                    item.draggable = false;
+                });
+                
+                editBtn.addEventListener('mouseup', (e) => {
+                    item.draggable = true;
+                });
+            }
+
             // Drag start event
             item.addEventListener('dragstart', (e) => {
-                // Only allow drag if not clicking on link or delete button
-                if (e.target.closest('.bookmark-link') || e.target.closest('.bookmark-delete')) {
+                // Only allow drag if not clicking on link, edit button, or delete button
+                if (e.target.closest('.bookmark-link') || 
+                    e.target.closest('.bookmark-delete') || 
+                    e.target.closest('.bookmark-edit')) {
                     e.preventDefault();
                     return false;
                 }
@@ -245,8 +317,10 @@ class BookmarkManager {
 
         bookmarkItems.forEach(item => {
             item.addEventListener('touchstart', (e) => {
-                // Only start drag if touching the drag handle or item itself (not link or delete)
-                if (e.target.closest('.bookmark-link') || e.target.closest('.bookmark-delete')) {
+                // Only start drag if touching the drag handle or item itself (not link, edit, or delete)
+                if (e.target.closest('.bookmark-link') || 
+                    e.target.closest('.bookmark-delete') || 
+                    e.target.closest('.bookmark-edit')) {
                     return;
                 }
                 
@@ -341,6 +415,32 @@ function hideAddBookmarkModal() {
     document.getElementById('bookmarkIcon').value = '';
 }
 
+function showEditBookmarkModal() {
+    document.getElementById('editBookmarkModal').style.display = 'flex';
+}
+
+function hideEditBookmarkModal() {
+    document.getElementById('editBookmarkModal').style.display = 'none';
+    document.getElementById('editBookmarkId').value = '';
+    document.getElementById('editBookmarkName').value = '';
+    document.getElementById('editBookmarkUrl').value = '';
+    document.getElementById('editBookmarkIcon').value = '';
+}
+
+function updateBookmark(event) {
+    event.preventDefault();
+    
+    const id = parseInt(document.getElementById('editBookmarkId').value);
+    const name = document.getElementById('editBookmarkName').value;
+    const url = document.getElementById('editBookmarkUrl').value;
+    const icon = document.getElementById('editBookmarkIcon').value;
+    
+    if (name && url) {
+        bookmarkManager.updateBookmark(id, name, url, icon);
+        hideEditBookmarkModal();
+    }
+}
+
 function addBookmark(event) {
     event.preventDefault();
     
@@ -356,9 +456,14 @@ function addBookmark(event) {
 
 // Close modal when clicking outside
 document.addEventListener('click', function(event) {
-    const modal = document.getElementById('bookmarkModal');
-    if (event.target === modal) {
+    const addModal = document.getElementById('bookmarkModal');
+    const editModal = document.getElementById('editBookmarkModal');
+    
+    if (event.target === addModal) {
         hideAddBookmarkModal();
+    }
+    if (event.target === editModal) {
+        hideEditBookmarkModal();
     }
 });
 
@@ -367,8 +472,12 @@ let bookmarkManager;
 document.addEventListener('DOMContentLoaded', function() {
     bookmarkManager = new BookmarkManager();
     
-    // Add event listeners for modal
+    // Add event listeners for add bookmark modal
     document.getElementById('addBookmarkBtn').addEventListener('click', showAddBookmarkModal);
     document.getElementById('cancelBookmarkBtn').addEventListener('click', hideAddBookmarkModal);
     document.getElementById('bookmarkForm').addEventListener('submit', addBookmark);
+    
+    // Add event listeners for edit bookmark modal
+    document.getElementById('cancelEditBookmarkBtn').addEventListener('click', hideEditBookmarkModal);
+    document.getElementById('editBookmarkForm').addEventListener('submit', updateBookmark);
 });
