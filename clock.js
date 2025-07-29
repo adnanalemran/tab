@@ -2,16 +2,24 @@
 function updateTime() {
     const now = new Date();
     
-    // Current day and date for header
-    const currentDay = now.toLocaleDateString('en-US', {
-        weekday: 'long'
+    // Current time for main display
+    const currentTime = now.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit'
     });
-    const currentDate = `Date: ${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
     
-    // Update header with current day and date
-    const dayDisplay = document.getElementById('currentDay');
-    if (dayDisplay) {
-        dayDisplay.innerHTML = currentDay;
+    // Current date for main display
+    const currentDate = now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    // Update main time and date displays
+    const timeDisplay = document.getElementById('currentTime');
+    if (timeDisplay) {
+        timeDisplay.innerHTML = currentTime;
     }
     
     const dateDisplay = document.getElementById('currentDate');
@@ -26,12 +34,6 @@ function updateTime() {
         hour: '2-digit',
         minute: '2-digit'
     });
-    const australiaDate = now.toLocaleDateString('en-US', {
-        timeZone: 'Australia/Sydney',
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric'
-    });
     
     // Bangladesh Time (BST)
     const bangladeshTime = now.toLocaleTimeString('en-US', { 
@@ -40,14 +42,8 @@ function updateTime() {
         hour: '2-digit',
         minute: '2-digit'
     });
-    const bangladeshDate = now.toLocaleDateString('en-US', {
-        timeZone: 'Asia/Dhaka',
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric'
-    });
     
-    // Update time displays with simple format
+    // Update timezone displays
     const australiaDisplay = document.getElementById('australiaTime');
     if (australiaDisplay) {
         australiaDisplay.innerHTML = australiaTime;

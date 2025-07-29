@@ -11,7 +11,41 @@ class BookmarkManager {
 
     loadBookmarks() {
         const stored = localStorage.getItem('newTabBookmarks');
-        return stored ? JSON.parse(stored) : [];
+        if (stored) {
+            return JSON.parse(stored);
+        }
+        
+        // Return default bookmarks for first-time users
+        return [
+            {
+                id: 1,
+                name: 'GitHub',
+                url: 'https://github.com',
+                icon: '🐙',
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 2,
+                name: 'Stack Overflow',
+                url: 'https://stackoverflow.com',
+                icon: '📚',
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 3,
+                name: 'MDN Web Docs',
+                url: 'https://developer.mozilla.org',
+                icon: '📖',
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 4,
+                name: 'CodePen',
+                url: 'https://codepen.io',
+                icon: '✏️',
+                dateAdded: new Date().toISOString()
+            }
+        ];
     }
 
     saveBookmarks() {
@@ -19,44 +53,88 @@ class BookmarkManager {
     }
 
     addBookmark(name, url, icon = '🔖') {
+        // Validate inputs
+        if (!name.trim()) {
+            this.showNotification('Please enter a bookmark name', 'error');
+            return false;
+        }
+        
+        if (!url.trim()) {
+            this.showNotification('Please enter a valid URL', 'error');
+            return false;
+        }
+
+        // Check for duplicate names
+        if (this.bookmarks.some(b => b.name.toLowerCase() === name.trim().toLowerCase())) {
+            this.showNotification('A bookmark with this name already exists', 'error');
+            return false;
+        }
+
         const bookmark = {
             id: Date.now(),
             name: name.trim(),
             url: url.trim(),
-            icon: icon.trim() || '🔖'
+            icon: icon.trim() || '🔖',
+            dateAdded: new Date().toISOString()
         };
         
         this.bookmarks.push(bookmark);
         this.saveBookmarks();
         this.renderBookmarks();
+        this.showNotification(`"${bookmark.name}" added successfully!`, 'success');
+        return true;
     }
 
     removeBookmark(id) {
         const bookmark = this.bookmarks.find(b => b.id === id);
         if (!bookmark) return;
         
-        // Show confirmation dialog
-        if (confirm(`Are you sure you want to delete "${bookmark.name}"?`)) {
+        // Enhanced confirmation dialog
+        const confirmMessage = `Are you sure you want to delete "${bookmark.name}"?\n\nThis action cannot be undone.`;
+        if (confirm(confirmMessage)) {
             this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
             this.saveBookmarks();
             this.renderBookmarks();
             
-            // Show success message briefly
-            this.showNotification('Bookmark deleted successfully!', 'success');
+            // Show success message with undo option (for future enhancement)
+            this.showNotification(`"${bookmark.name}" deleted successfully`, 'success');
         }
     }
 
     showNotification(message, type = 'info') {
+        // Remove any existing notifications
+        const existingNotifications = document.querySelectorAll('.bookmark-notification');
+        existingNotifications.forEach(n => n.remove());
+
         const notification = document.createElement('div');
         notification.className = `bookmark-notification ${type}`;
-        notification.textContent = message;
+        
+        // Add icon based on type
+        const icons = {
+            success: '✅',
+            error: '❌',
+            info: 'ℹ️'
+        };
+        
+        notification.innerHTML = `
+            <span style="margin-right: 8px;">${icons[type] || icons.info}</span>
+            ${message}
+        `;
+        
         document.body.appendChild(notification);
         
+        // Trigger entrance animation
         setTimeout(() => notification.classList.add('show'), 100);
+        
+        // Auto-remove after delay
         setTimeout(() => {
             notification.classList.remove('show');
-            setTimeout(() => notification.remove(), 300);
-        }, 2000);
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 300);
+        }, type === 'error' ? 4000 : 3000); // Show errors longer
     }
 
     renderBookmarks() {
@@ -64,46 +142,79 @@ class BookmarkManager {
         if (!container) return;
 
         if (this.bookmarks.length === 0) {
-            container.innerHTML = '<p style="color: #6b7280; text-align: center; padding: 1rem;">No bookmarks yet. Add some!</p>';
+            container.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 2rem 1rem; color: #8e8e93;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">📚</div>
+                    <div style="font-weight: 500; margin-bottom: 0.5rem;">No bookmarks yet</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7;">Click the + button to add your first bookmark</div>
+                </div>
+            `;
             return;
         }
 
-        container.innerHTML = this.bookmarks.map(bookmark => `
+        container.innerHTML = this.bookmarks.map((bookmark, index) => `
             <div class="bookmark-item" 
                  data-bookmark-id="${bookmark.id}"
+                 data-color-index="${index % 4}"
                  draggable="true"
-                 title="Drag to reorder • Click to visit">
+                 title="${bookmark.name} - ${bookmark.url}">
                 <span class="drag-handle" title="Drag to reorder">⋮⋮</span>
-                <a href="${bookmark.url}" class="bookmark-link" target="_blank" rel="noopener noreferrer">
+                <a href="${this.formatUrl(bookmark.url)}" class="bookmark-link" target="_blank" rel="noopener noreferrer">
                     <span class="bookmark-icon">${bookmark.icon}</span>
-                    <span class="bookmark-name">${bookmark.name}</span>
+                    <span class="bookmark-name">${this.truncateText(bookmark.name, 20)}</span>
                 </a>
                 <button class="bookmark-edit" 
                         data-bookmark-id="${bookmark.id}"
-                        title="Edit '${bookmark.name}'"
-                        aria-label="Edit bookmark ${bookmark.name}">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 20h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        title="Edit ${bookmark.name}"
+                        aria-label="Edit bookmark">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                     </svg>
                 </button>
                 <button class="bookmark-delete" 
                         data-bookmark-id="${bookmark.id}"
-                        data-bookmark-name="${bookmark.name}"
-                        title="Delete '${bookmark.name}'"
-                        aria-label="Delete bookmark ${bookmark.name}">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        title="Delete ${bookmark.name}"
+                        aria-label="Delete bookmark">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18"/>
+                        <path d="M6 6L18 18"/>
                     </svg>
                 </button>
             </div>
         `).join('');
+
+        // Add staggered animation for new items
+        const items = container.querySelectorAll('.bookmark-item');
+        items.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                item.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, index * 50);
+        });
         
         // Add event listeners for delete buttons and drag & drop
         this.attachDeleteListeners();
         this.attachEditListeners();
         this.attachDragAndDropListeners();
         this.attachTouchListeners();
+    }
+
+    // Helper method to format URLs
+    formatUrl(url) {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            return 'https://' + url;
+        }
+        return url;
+    }
+
+    // Helper method to truncate text
+    truncateText(text, maxLength) {
+        if (text.length <= maxLength) return text;
+        return text.substring(0, maxLength - 1) + '…';
     }
 
     attachDeleteListeners() {
@@ -148,18 +259,41 @@ class BookmarkManager {
 
     updateBookmark(id, name, url, icon) {
         const bookmarkIndex = this.bookmarks.findIndex(b => b.id === id);
-        if (bookmarkIndex === -1) return;
+        if (bookmarkIndex === -1) {
+            this.showNotification('Bookmark not found', 'error');
+            return false;
+        }
         
+        // Validate inputs
+        if (!name.trim()) {
+            this.showNotification('Please enter a bookmark name', 'error');
+            return false;
+        }
+        
+        if (!url.trim()) {
+            this.showNotification('Please enter a valid URL', 'error');
+            return false;
+        }
+
+        // Check for duplicate names (excluding current bookmark)
+        if (this.bookmarks.some(b => b.id !== id && b.name.toLowerCase() === name.trim().toLowerCase())) {
+            this.showNotification('A bookmark with this name already exists', 'error');
+            return false;
+        }
+        
+        const oldName = this.bookmarks[bookmarkIndex].name;
         this.bookmarks[bookmarkIndex] = {
             ...this.bookmarks[bookmarkIndex],
             name: name.trim(),
             url: url.trim(),
-            icon: icon.trim() || '🔖'
+            icon: icon.trim() || '🔖',
+            dateModified: new Date().toISOString()
         };
         
         this.saveBookmarks();
         this.renderBookmarks();
-        this.showNotification('Bookmark updated successfully!', 'success');
+        this.showNotification(`"${oldName}" updated successfully!`, 'success');
+        return true;
     }
 
     attachDragAndDropListeners() {
@@ -435,8 +569,8 @@ function updateBookmark(event) {
     const url = document.getElementById('editBookmarkUrl').value;
     const icon = document.getElementById('editBookmarkIcon').value;
     
-    if (name && url) {
-        bookmarkManager.updateBookmark(id, name, url, icon);
+    // The validation is now handled in the updateBookmark method
+    if (bookmarkManager.updateBookmark(id, name, url, icon)) {
         hideEditBookmarkModal();
     }
 }
@@ -448,8 +582,8 @@ function addBookmark(event) {
     const url = document.getElementById('bookmarkUrl').value;
     const icon = document.getElementById('bookmarkIcon').value;
     
-    if (name && url) {
-        bookmarkManager.addBookmark(name, url, icon);
+    // The validation is now handled in the addBookmark method
+    if (bookmarkManager.addBookmark(name, url, icon)) {
         hideAddBookmarkModal();
     }
 }
