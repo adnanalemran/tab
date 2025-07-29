@@ -35,13 +35,22 @@ body {
 
 /* Time Display */
 .time-display {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.left {
+    flex: 1;
+    text-align: left;
 }
 
 .time {
     font-size: 3.5rem;
     font-weight: 300;
     margin-bottom: 8px;
+    line-height: 1;
 }
 
 .date {
@@ -51,9 +60,9 @@ body {
 
 .timezones {
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    gap: 16px;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 140px;
 }
 
 .timezone {
@@ -480,10 +489,132 @@ body {
     opacity: 0.8;
 }
 
+/* Footer Styles */
+.footer-card {
+    margin-top: 12px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(248, 250, 252, 0.4));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    color: #86868b;
+    min-height: 40px;
+}
+
+.credit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+.credit-text {
+    color: #86868b;
+    font-size: 0.75rem;
+}
+
+.heart {
+    color: #FF3B30;
+    font-size: 0.85rem;
+    animation: heartbeat 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 1px 2px rgba(255, 59, 48, 0.2));
+}
+
+.credit-name {
+    color: #007AFF;
+    font-weight: 600;
+    font-size: 0.8rem;
+    background: linear-gradient(135deg, #007AFF, #5856D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.credit-name::after {
+    content: "😊";
+    position: absolute;
+    right: -18px;
+    top: -2px;
+    font-size: 0.7rem;
+    opacity: 0.6;
+    animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+}
+
+.version {
+    background: rgba(0, 122, 255, 0.1);
+    color: #007AFF;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.7rem;
+}
+
+.separator {
+    color: #d1d1d6;
+    font-size: 0.7rem;
+}
+
+.year {
+    color: #8e8e93;
+    font-weight: 500;
+    font-size: 0.7rem;
+}
+
+/* Gentle bounce animation for smile */
+@keyframes gentle-bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-1px) scale(1.05);
+    }
+}
+
+/* Updated heartbeat animation */
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    75% {
+        transform: scale(1.05);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
         padding: 20px 16px;
+    }
+    
+    .time-display {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .left {
+        text-align: center;
     }
     
     .time {
@@ -491,8 +622,10 @@ body {
     }
     
     .timezones {
-        flex-direction: column;
-        gap: 8px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 24px;
+        min-width: auto;
     }
     
     .apps-grid {
@@ -531,11 +664,33 @@ body {
         font-size: 0.85rem;
         border-radius: 10px;
     }
+    
+    .footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        padding: 12px;
+        min-height: 36px;
+    }
+    
+    .footer-info {
+        order: -1;
+    }
+    
+    .credit-name::after {
+        right: -15px;
+        font-size: 0.65rem;
+    }
 }
 
 @media (max-width: 480px) {
     .time {
         font-size: 2rem;
+    }
+    
+    .timezones {
+        flex-direction: column;
+        gap: 8px;
     }
     
     .apps-grid {
@@ -557,5 +712,32 @@ body {
     
     .bookmark-name {
         font-size: 0.7rem;
+    }
+    
+    .footer {
+        padding: 0px 8px;
+        font-size: 0.75rem;
+        min-height: 32px;
+    }
+    
+    .credit {
+        gap: 4px;
+    }
+    
+    .credit-text {
+        font-size: 0.7rem;
+    }
+    
+    .credit-name {
+        font-size: 0.75rem;
+    }
+    
+    .credit-name::after {
+        right: -12px;
+        font-size: 0.6rem;
+    }
+    
+    .footer-info {
+        gap: 4px;
     }
 }
