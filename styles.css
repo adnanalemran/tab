@@ -7,10 +7,18 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     min-height: 100vh;
     color: #1d1d1f;
     padding: 40px 20px;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
@@ -23,12 +31,46 @@ body {
 
 /* Card Styles */
 .card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardSlideIn 0.6s ease forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
  
@@ -47,46 +89,86 @@ body {
 }
 
 .time {
-    font-size: 3.5rem;
-    font-weight: 300;
+    font-size: 3.8rem;
+    font-weight: 200;
     margin-bottom: 8px;
     line-height: 1;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .date {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #86868b;
+    font-weight: 500;
+    opacity: 0.8;
 }
 
 .timezones {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    min-width: 140px;
+    gap: 16px;
+    min-width: 150px;
 }
 
 .timezone {
     text-align: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.timezone:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
 }
 
 .timezone-label {
     font-size: 0.85rem;
     color: #86868b;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    font-weight: 500;
 }
 
 .timezone-time {
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Section Titles */
 .section-title {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 1px;
 }
 
 /* Apps Grid */
@@ -101,38 +183,71 @@ body {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    padding: 12px;
-    border-radius: 12px;
-    transition: all 0.2s ease;
+    padding: 16px 12px;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+}
+
+.app::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.app:hover::before {
+    opacity: 1;
 }
 
 .app:hover {
-    background: rgba(0, 0, 0, 0.05);
-    transform: scale(1.05);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .app-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.app:hover .app-icon {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .app-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     color: white;
 }
 
 .app-name {
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     text-align: center;
     color: #1d1d1f;
+    margin-top: 2px;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.app:hover .app-name {
+    opacity: 1;
+    transform: translateY(-1px);
 }
 
 /* Bookmarks Grid */
@@ -372,27 +487,51 @@ body {
 
 /* Add Button */
 .add-btn {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #007AFF;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.add-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.add-btn:hover::before {
+    opacity: 1;
 }
 
 .add-btn:hover {
-    background: #0051D5;
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.add-btn:active {
+    transform: scale(1.05) rotate(90deg);
 }
 
 .add-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     color: white;
+    transition: all 0.3s ease;
+    z-index: 1;
+    position: relative;
 }
 
 /* Modal Styles */
