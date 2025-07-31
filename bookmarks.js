@@ -163,24 +163,32 @@ class BookmarkManager {
                     <span class="bookmark-icon">${bookmark.icon}</span>
                     <span class="bookmark-name">${this.truncateText(bookmark.name, 20)}</span>
                 </a>
-                <button class="bookmark-edit" 
+                <button class="bookmark-menu" 
                         data-bookmark-id="${bookmark.id}"
-                        title="Edit ${bookmark.name}"
-                        aria-label="Edit bookmark">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        title="Options"
+                        aria-label="Bookmark options">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="5" r="2"/>
+                        <circle cx="12" cy="12" r="2"/>
+                        <circle cx="12" cy="19" r="2"/>
                     </svg>
                 </button>
-                <button class="bookmark-delete" 
-                        data-bookmark-id="${bookmark.id}"
-                        title="Delete ${bookmark.name}"
-                        aria-label="Delete bookmark">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 6L6 18"/>
-                        <path d="M6 6L18 18"/>
-                    </svg>
-                </button>
+                <div class="bookmark-dropdown" data-bookmark-id="${bookmark.id}">
+                    <button class="bookmark-dropdown-item edit-bookmark" data-bookmark-id="${bookmark.id}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Edit
+                    </button>
+                    <button class="bookmark-dropdown-item delete-bookmark delete" data-bookmark-id="${bookmark.id}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3,6 5,6 21,6"/>
+                            <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"/>
+                        </svg>
+                        Delete
+                    </button>
+                </div>
             </div>
         `).join('');
 
@@ -196,9 +204,8 @@ class BookmarkManager {
             }, index * 50);
         });
         
-        // Add event listeners for delete buttons and drag & drop
-        this.attachDeleteListeners();
-        this.attachEditListeners();
+        // Add event listeners for menu buttons and drag & drop
+        this.attachMenuListeners();
         this.attachDragAndDropListeners();
         this.attachTouchListeners();
     }
@@ -217,27 +224,57 @@ class BookmarkManager {
         return text.substring(0, maxLength - 1) + '…';
     }
 
-    attachDeleteListeners() {
-        const deleteButtons = document.querySelectorAll('.bookmark-delete');
-        deleteButtons.forEach(button => {
+    attachMenuListeners() {
+        // Handle 3-dot menu button clicks
+        const menuButtons = document.querySelectorAll('.bookmark-menu');
+        menuButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                const id = parseInt(button.dataset.bookmarkId);
-                this.removeBookmark(id);
+                
+                // Close all other dropdowns
+                document.querySelectorAll('.bookmark-dropdown.show').forEach(dropdown => {
+                    dropdown.classList.remove('show');
+                });
+                
+                // Toggle this dropdown
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle('show');
             });
         });
-    }
 
-    attachEditListeners() {
-        const editButtons = document.querySelectorAll('.bookmark-edit');
+        // Handle dropdown item clicks
+        const editButtons = document.querySelectorAll('.edit-bookmark');
         editButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 const id = parseInt(button.dataset.bookmarkId);
                 this.editBookmark(id);
+                // Close dropdown
+                button.closest('.bookmark-dropdown').classList.remove('show');
             });
+        });
+
+        const deleteButtons = document.querySelectorAll('.delete-bookmark');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = parseInt(button.dataset.bookmarkId);
+                this.removeBookmark(id);
+                // Close dropdown
+                button.closest('.bookmark-dropdown').classList.remove('show');
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.bookmark-menu') && !e.target.closest('.bookmark-dropdown')) {
+                document.querySelectorAll('.bookmark-dropdown.show').forEach(dropdown => {
+                    dropdown.classList.remove('show');
+                });
+            }
         });
     }
 
@@ -614,4 +651,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners for edit bookmark modal
     document.getElementById('cancelEditBookmarkBtn').addEventListener('click', hideEditBookmarkModal);
     document.getElementById('editBookmarkForm').addEventListener('submit', updateBookmark);
+    document.getElementById('deleteBookmarkBtn').addEventListener('click', function() {
+        const id = parseInt(document.getElementById('editBookmarkId').value);
+        const bookmark = bookmarkManager.bookmarks.find(b => b.id === id);
+        if (bookmark && confirm(`Are you sure you want to delete "${bookmark.name}"?\n\nThis action cannot be undone.`)) {
+            bookmarkManager.removeBookmark(id);
+            hideEditBookmarkModal();
+        }
+    });
 });

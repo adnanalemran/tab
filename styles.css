@@ -373,49 +373,102 @@ body {
     -webkit-box-orient: vertical;
 }
 
-/* Action Buttons */
-.bookmark-edit,
-.bookmark-delete {
+/* Three Dot Menu */
+.bookmark-menu {
     position: absolute;
+    top: 8px;
+    right: 8px;
     width: 24px;
     height: 24px;
     border: none;
     border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     opacity: 0;
     transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.bookmark-edit {
-    top: 6px;
-    right: 32px;
-    background: rgba(59, 130, 246, 0.9);
-    color: white;
-}
-
-.bookmark-edit:hover {
-    background: rgb(59, 130, 246);
+.bookmark-menu:hover {
+    background: rgba(255, 255, 255, 1);
     transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.bookmark-delete {
-    top: 6px;
-    right: 6px;
-    background: rgba(239, 68, 68, 0.9);
-    color: white;
+.bookmark-menu svg {
+    width: 14px;
+    height: 14px;
+    color: #6b7280;
 }
 
-.bookmark-delete:hover {
-    background: rgb(239, 68, 68);
-    transform: scale(1.1);
-}
-
-.bookmark-item:hover .bookmark-edit,
-.bookmark-item:hover .bookmark-delete {
+.bookmark-item:hover .bookmark-menu {
     opacity: 1;
+}
+
+/* Dropdown Menu */
+.bookmark-dropdown {
+    position: absolute;
+    top: 32px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.bookmark-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.bookmark-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.bookmark-dropdown-item:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.bookmark-dropdown-item:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.bookmark-dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.bookmark-dropdown-item.delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.bookmark-dropdown-item svg {
+    width: 14px;
+    height: 14px;
 }
 
 /* Notification */
@@ -555,6 +608,10 @@ body {
     margin-top: 24px;
 }
 
+.modal-buttons.edit-mode {
+    justify-content: space-between;
+}
+
 .btn {
     flex: 1;
     padding: 12px;
@@ -563,6 +620,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-size: 0.9rem;
 }
 
 .btn-cancel {
@@ -575,8 +633,20 @@ body {
     color: white;
 }
 
+.btn-delete {
+    background: #ef4444;
+    color: white;
+    flex: 0 0 auto;
+    min-width: 100px;
+}
+
 .btn:hover {
     opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+.btn-delete:hover {
+    background: #dc2626;
 }
 
 /* Footer Styles */

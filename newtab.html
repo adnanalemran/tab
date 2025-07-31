@@ -197,15 +197,24 @@
             <label for="editBookmarkIcon">Icon</label>
             <input type="text" id="editBookmarkIcon" placeholder="📝" />
           </div>
-          <div class="modal-buttons">
+          <div class="modal-buttons edit-mode">
             <button
               type="button"
-              class="btn btn-cancel"
-              id="cancelEditBookmarkBtn"
+              class="btn btn-delete"
+              id="deleteBookmarkBtn"
             >
-              Cancel
+              Delete
             </button>
-            <button type="submit" class="btn btn-save">Update</button>
+            <div style="display: flex; gap: 12px; flex: 1;">
+              <button
+                type="button"
+                class="btn btn-cancel"
+                id="cancelEditBookmarkBtn"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-save">Update</button>
+            </div>
           </div>
         </form>
       </div>
